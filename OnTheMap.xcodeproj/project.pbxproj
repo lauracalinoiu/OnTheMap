@@ -12,6 +12,7 @@
 		D324214E1BBBD2A300ABC598 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D324214C1BBBD2A300ABC598 /* Main.storyboard */; };
 		D32421501BBBD2A300ABC598 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D324214F1BBBD2A300ABC598 /* Assets.xcassets */; };
 		D32421531BBBD2A300ABC598 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D32421511BBBD2A300ABC598 /* LaunchScreen.storyboard */; };
+		D32421681BBBD55900ABC598 /* UdacityAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = D32421671BBBD55900ABC598 /* UdacityAuth.swift */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +23,7 @@
 		D324214F1BBBD2A300ABC598 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D32421521BBBD2A300ABC598 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D32421541BBBD2A300ABC598 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D32421671BBBD55900ABC598 /* UdacityAuth.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UdacityAuth.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +56,7 @@
 		D32421471BBBD2A300ABC598 /* OnTheMap */ = {
 			isa = PBXGroup;
 			children = (
+				D324215A1BBBD42000ABC598 /* NetClient */,
 				D32421481BBBD2A300ABC598 /* AppDelegate.swift */,
 				D324214A1BBBD2A300ABC598 /* ViewController.swift */,
 				D324214C1BBBD2A300ABC598 /* Main.storyboard */,
@@ -62,6 +65,14 @@
 				D32421541BBBD2A300ABC598 /* Info.plist */,
 			);
 			path = OnTheMap;
+			sourceTree = "<group>";
+		};
+		D324215A1BBBD42000ABC598 /* NetClient */ = {
+			isa = PBXGroup;
+			children = (
+				D32421671BBBD55900ABC598 /* UdacityAuth.swift */,
+			);
+			name = NetClient;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -137,6 +148,7 @@
 			files = (
 				D324214B1BBBD2A300ABC598 /* ViewController.swift in Sources */,
 				D32421491BBBD2A300ABC598 /* AppDelegate.swift in Sources */,
+				D32421681BBBD55900ABC598 /* UdacityAuth.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -250,6 +262,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = OnTheMap/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "-smurfs.com.OnTheMap";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -261,6 +274,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = OnTheMap/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "-smurfs.com.OnTheMap";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -286,6 +300,7 @@
 				D32421591BBBD2A300ABC598 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
