@@ -9,7 +9,7 @@
 import UIKit
 
 class ViewController: UIViewController {
-
+    
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var debugLabel: UILabel!
@@ -18,33 +18,49 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         debugLabel.hidden = true
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
-
+    
+    
     func printDebugMessage(message: String){
-        debugLabel.hidden = false
-        debugLabel.text = message
+        dispatch_async(dispatch_get_main_queue()){
+            self.debugLabel.hidden = false
+            self.debugLabel.text = message
+        }
     }
     
     @IBAction func onLoginPressed(sender: UIButton) {
+        if allFieldsAreValid(){
+            UdacityAPIClient.sharedInstance().authenticateOnUdacity(emailTextField.text!, password: passwordTextField.text!){ success, error in
+                guard error == nil else{
+                    self.printDebugMessage(error!)
+                    return
+                }
+                if success{
+                    let controller = self.storyboard!.instantiateViewControllerWithIdentifier("OnMapTabController") as! UITabBarController
+                    dispatch_async(dispatch_get_main_queue()){
+                        self.presentViewController(controller, animated: true, completion: nil)
+                    }
+                }
+            }
+        }
+    }
+    
+    func allFieldsAreValid() -> Bool{
         guard emailTextField.text != nil || emailTextField.text != "" else{
             printDebugMessage("Complete email field")
-            return
+            return false
         }
-        
         guard passwordTextField.text != nil || emailTextField.text != "" else{
             printDebugMessage("Complete password field")
-            return
+            return false
         }
-        
-        UdacityAuth.sharedInstance().makeRequestToUdacity(emailTextField.text!, password: passwordTextField.text!)
-        
+        return true
     }
-
+    
     @IBAction func onSignUpPressed(sender: UIButton) {
     }
     
