@@ -112,21 +112,7 @@
                                     <constraint firstItem="0u2-cx-U5h" firstAttribute="centerX" secondItem="BcG-i4-gFE" secondAttribute="centerX" id="nVT-cA-L3A"/>
                                 </constraints>
                             </stackView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Ln-LL-fLW">
-                                <rect key="frame" x="40" y="562" width="520" height="30"/>
-                                <color key="backgroundColor" red="0.23137254901960785" green="0.34901960784313724" blue="0.59607843137254901" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="0An-Rm-XQB"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
-                                <state key="normal" title="Sign in with Facebook">
-                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="onSignInWithFacebookPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="nqr-7S-LZX"/>
-                                </connections>
-                            </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Messages to the user!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7XV-Ty-Rge">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Messages to the user!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7XV-Ty-Rge">
                                 <rect key="frame" x="40" y="379" width="520" height="182"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -140,11 +126,7 @@
                         <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
                         <constraints>
                             <constraint firstItem="7XV-Ty-Rge" firstAttribute="leading" secondItem="BcG-i4-gFE" secondAttribute="leading" id="0vn-j8-cHZ"/>
-                            <constraint firstItem="0Ln-LL-fLW" firstAttribute="top" secondItem="7XV-Ty-Rge" secondAttribute="bottom" constant="1" id="82w-bY-Opb"/>
-                            <constraint firstItem="0Ln-LL-fLW" firstAttribute="bottom" secondItem="wfy-db-euE" secondAttribute="top" constant="-8" id="84q-xr-csY"/>
                             <constraint firstItem="7XV-Ty-Rge" firstAttribute="top" secondItem="BcG-i4-gFE" secondAttribute="bottom" constant="14" id="Gwt-15-4Tc"/>
-                            <constraint firstItem="0Ln-LL-fLW" firstAttribute="trailing" secondItem="7XV-Ty-Rge" secondAttribute="trailing" id="Lzz-xb-lVv"/>
-                            <constraint firstItem="7XV-Ty-Rge" firstAttribute="leading" secondItem="0Ln-LL-fLW" secondAttribute="leading" id="N84-xi-dfT"/>
                             <constraint firstItem="BcG-i4-gFE" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="20" id="Ryd-A8-Oeu"/>
                             <constraint firstItem="O1h-Sa-Dv6" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="280" id="UAF-Sm-wMx"/>
                             <constraint firstAttribute="trailingMargin" secondItem="BcG-i4-gFE" secondAttribute="trailing" constant="20" id="bQA-p2-Zpr"/>
