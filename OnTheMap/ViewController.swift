@@ -13,10 +13,14 @@ class ViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var debugLabel: UILabel!
+    @IBOutlet weak var loginButton: UIButton!
+    @IBOutlet weak var activityWeel: UIActivityIndicatorView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         debugLabel.hidden = true
+        loginButton.enabled = true
+        activityWeel.hidden = true
         
         emailTextField.delegate = self
         passwordTextField.delegate = self
@@ -34,18 +38,43 @@ class ViewController: UIViewController, UITextFieldDelegate {
         return true
     }
     
-    func printDebugMessage(message: String){
-        dispatch_async(dispatch_get_main_queue()){
-            self.debugLabel.hidden = false
-            self.debugLabel.text = message
+    func showActivityWeel(){
+        self.activityWeel.hidden = false
+        self.activityWeel.startAnimating()
+    }
+    
+    func hideActivityWeel(){
+        self.activityWeel.stopAnimating()
+        self.activityWeel.hidden = true
+    }
+    
+    
+    func allFieldsAreValid() -> Bool{
+        guard emailTextField.text != nil && emailTextField.text != "" else{
+            alertMessage("Complete email field")
+            emailTextField.becomeFirstResponder()
+            return false
         }
+        guard passwordTextField.text != nil && passwordTextField.text != "" else{
+            alertMessage("Complete password field")
+            passwordTextField.becomeFirstResponder()
+            return false
+        }
+        return true
     }
     
     @IBAction func onLoginPressed(sender: UIButton) {
+        dismissKeyboard()
+        debugLabel.hidden = true
+        
         if allFieldsAreValid(){
+            
+            loginButton.enabled = false
+            self.showActivityWeel()
+            
             UdacityAPIClient.sharedInstance().authenticateOnUdacity(emailTextField.text!, password: passwordTextField.text!){ success, error in
                 guard error == nil else{
-                    self.printDebugMessage(error!)
+                    self.alertMessage(error!)
                     return
                 }
                 if success{
@@ -58,23 +87,38 @@ class ViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
-    func allFieldsAreValid() -> Bool{
-        guard emailTextField.text != nil || emailTextField.text != "" else{
-            printDebugMessage("Complete email field")
-            return false
-        }
-        guard passwordTextField.text != nil || emailTextField.text != "" else{
-            printDebugMessage("Complete password field")
-            return false
-        }
-        return true
-    }
-    
     @IBAction func onSignUpPressed(sender: UIButton) {
+        if let openLink = NSURL(string : UdacityAPIClient.Constant.SignInUdacityURL){
+            UIApplication.sharedApplication().openURL(openLink)
+        }
     }
     
     @IBAction func onSignInWithFacebookPressed(sender: UIButton) {
     }
     
+}
+
+extension ViewController{
+    
+    func alertMessage(message: String){
+        dispatch_async(dispatch_get_main_queue()){
+            self.loginButton.enabled = true
+            self.hideActivityWeel()
+            let alertController = UIAlertController(title: "Error Message", message:
+                message, preferredStyle: UIAlertControllerStyle.Alert)
+            alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default,handler: nil))
+            
+            self.presentViewController(alertController, animated: true, completion: nil)
+        }
+    }
+    
+    func printDebugMessage(message: String){
+        dispatch_async(dispatch_get_main_queue()){
+            self.debugLabel.hidden = false
+            self.debugLabel.text = message
+            self.loginButton.enabled = true
+            self.hideActivityWeel()
+        }
+    }
 }
 

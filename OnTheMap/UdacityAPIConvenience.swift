@@ -19,22 +19,22 @@ extension UdacityAPIClient{
                 completionHandler(success: false, errorString: error)
             } else {
                 guard let parsedJSON = JSONResult as? [String: AnyObject] else{
-                    completionHandler(success: false, errorString: "Could not parse session method response")
+                    completionHandler(success: false, errorString: ErrorString.somethingWentWrong)
                     return
                 }
                 
                 guard let account = parsedJSON["account"] as? [String : AnyObject] else{
-                    completionHandler(success: false, errorString: "Could not parse session method response")
+                    completionHandler(success: false, errorString: ErrorString.somethingWentWrong)
                     return
                 }
                 
                 guard let registered = account["registered"] as? Bool where registered == true else{
-                    completionHandler(success: false, errorString: "Could not parse session method response")
+                    completionHandler(success: false, errorString: ErrorString.somethingWentWrong)
                     return
                 }
                 
                 guard let key = (account["key"] as? String) else{
-                    completionHandler(success: false, errorString: "Could not parse session method response")
+                    completionHandler(success: false, errorString: ErrorString.somethingWentWrong)
                     return
                 }
                 
