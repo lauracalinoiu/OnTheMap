@@ -23,7 +23,7 @@ class UdacityAPIClient: NSObject{
         super.init()
     }
     
-    func taskForPOSTMethod(method: String, jsonBody: String, completionHandler: (result: AnyObject!, errorString: String?) -> Void) -> NSURLSessionDataTask {
+    func taskForPOSTMethod(method: String, jsonBody: String, completionHandler: (result: AnyObject!, errorString: String?, statusCode: Int?) -> Void) -> NSURLSessionDataTask {
         
         let urlString = Constant.BaseUdacitySecureURL + method
         
@@ -39,26 +39,21 @@ class UdacityAPIClient: NSObject{
             
             guard (error == nil) else {
                 print("There was an error with your request: \(error)")
-                completionHandler(result: nil, errorString: ErrorString.failedNetworkConnection)
+                completionHandler(result: nil, errorString: ErrorString.failedNetworkConnection, statusCode: nil)
                 return
             }
             
             guard let statusCode = (response as? NSHTTPURLResponse)?.statusCode where statusCode >= 200 && statusCode <= 299 else {
                 if let response = response as? NSHTTPURLResponse {
-                    if response.statusCode == 403{
-                        print("Wrong user/password combination!")
-                        completionHandler(result: nil, errorString: ErrorString.wrongCredentials)
-                    }
-                    else{
-                        print("Your request returned an invalid response! Status code: \(response.statusCode)!")
-                        completionHandler(result: nil, errorString: ErrorString.invalidResponse+"\(response.statusCode)")
-                    }
+                    print("Your request returned an invalid response! Status code: \(response.statusCode)!")
+                    completionHandler(result: nil, errorString: ErrorString.invalidResponse+"\(response.statusCode)", statusCode: response.statusCode)
+                    
                 } else if let response = response {
                     print("Your request returned an invalid response! Response: \(response)!")
-                    completionHandler(result: nil, errorString: ErrorString.invalidResponse+" \(response)")
+                    completionHandler(result: nil, errorString: ErrorString.invalidResponse+" \(response)", statusCode: nil)
                 } else {
                     print("Your request returned an invalid response!")
-                    completionHandler(result: nil, errorString: ErrorString.invalidResponse)
+                    completionHandler(result: nil, errorString: ErrorString.invalidResponse, statusCode: nil)
                 }
                 
                 return
@@ -66,10 +61,12 @@ class UdacityAPIClient: NSObject{
             
             guard let data = data else {
                 print("No data was returned by the request!")
-                completionHandler(result: nil, errorString: ErrorString.somethingWentWrong)
+                completionHandler(result: nil, errorString: ErrorString.somethingWentWrong, statusCode: nil)
                 return
             }
-            UdacityAPIClient.parseJSONWithCompletionHandler(data, completionHandler: completionHandler)
+            UdacityAPIClient.parseJSONWithCompletionHandler(data){ result, error in
+                completionHandler(result: result, errorString: error, statusCode: nil)
+            }
         }
         task.resume()
         return task

@@ -82,7 +82,7 @@
                                                     <color key="titleColor" red="0.73213546309999999" green="0.53027501720000003" blue="0.54040827390000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="onLoginPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="88v-AR-7Ae"/>
+                                                    <action selector="onLoginWithCredentialsPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="svb-wH-8M7"/>
                                                 </connections>
                                             </button>
                                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zuD-Ps-0KJ">

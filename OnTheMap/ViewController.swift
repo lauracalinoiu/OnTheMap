@@ -19,6 +19,11 @@ class ViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var activityWeel: UIActivityIndicatorView!
     @IBOutlet weak var facebookLoginButton: UIButton!
     
+    let completeEmailFieldError = "Complete email field"
+    let completePasswordFieldError = "Complete password field"
+    let didNotSpecifyExactlyOneCredentialError = "Did not specify exactly one credential!"
+    let loginWithFacebookWentWrong = "Login with facebook went wrong, try using credentials from Udacity!"
+    
     let readPermissions = ["public_profile", "email", "user_friends"]
     
     override func viewDidLoad() {
@@ -56,40 +61,42 @@ class ViewController: UIViewController, UITextFieldDelegate {
     
     func allFieldsAreValid() -> Bool{
         guard emailTextField.text != nil && emailTextField.text != "" else{
-            alertMessage("Complete email field")
+            alertMessage(completeEmailFieldError)
             emailTextField.becomeFirstResponder()
             return false
         }
         guard passwordTextField.text != nil && passwordTextField.text != "" else{
-            alertMessage("Complete password field")
+            alertMessage(completePasswordFieldError)
             passwordTextField.becomeFirstResponder()
             return false
         }
         return true
     }
     
-    @IBAction func onLoginPressed(sender: UIButton) {
+    @IBAction func onLoginWithCredentialsPressed(sender: UIButton) {
         dismissKeyboard()
         debugLabel.hidden = true
         
-        if allFieldsAreValid(){
-            
-            loginButton.enabled = false
-            self.showActivityWeel()
-            
-            UdacityAPIClient.sharedInstance().authenticateOnUdacity(emailTextField.text!, password: passwordTextField.text!){ success, error in
-                guard error == nil else{
-                    self.alertMessage(error!)
-                    return
-                }
-                if success{
-                    let controller = self.storyboard!.instantiateViewControllerWithIdentifier("OnMapTabController") as! UITabBarController
-                    dispatch_async(dispatch_get_main_queue()){
-                        self.presentViewController(controller, animated: true, completion: nil)
-                    }
+        guard allFieldsAreValid() else{
+            return
+        }
+        
+        loginButton.enabled = false
+        self.showActivityWeel()
+        
+        UdacityAPIClient.sharedInstance().authenticateOnUdacity(emailTextField.text!, password: passwordTextField.text!){ success, error in
+            guard error == nil else{
+                self.alertMessage(error!)
+                return
+            }
+            if success{
+                let controller = self.storyboard!.instantiateViewControllerWithIdentifier("OnMapTabController") as! UITabBarController
+                dispatch_async(dispatch_get_main_queue()){
+                    self.presentViewController(controller, animated: true, completion: nil)
                 }
             }
         }
+        
     }
     
     @IBAction func onSignUpPressed(sender: UIButton) {
@@ -100,20 +107,35 @@ class ViewController: UIViewController, UITextFieldDelegate {
     
     @IBAction func onLoginWithFacebookPressed(sender: UIButton) {
         
+        guard emailTextField.text == "" && passwordTextField.text == "" else{
+            self.alertMessage(didNotSpecifyExactlyOneCredentialError)
+            return
+        }
         let fbManager = FBSDKLoginManager()
         fbManager.logInWithReadPermissions(readPermissions, fromViewController: self){ result, error in
             if ((error) != nil){
                 print(error.description)
-                self.alertMessage("Login with facebook went wrong, try using credentials from Udacity!")
+                self.alertMessage(self.loginWithFacebookWentWrong)
             }else if result.isCancelled {
                 print("result is cancelled")
-                self.alertMessage("Login with facebook went wrong, try using credentials from Udacity!")
+                self.alertMessage(self.loginWithFacebookWentWrong)
             }else {
-                print(FBSDKAccessToken.currentAccessToken().tokenString)
+                UdacityAPIClient.sharedInstance().authenticateOnUdacityWithFacebook(FBSDKAccessToken.currentAccessToken().tokenString){ success, error in
+                    guard error == nil else{
+                        self.alertMessage(error!)
+                        return
+                    }
+                    if success{
+                        let controller = self.storyboard!.instantiateViewControllerWithIdentifier("OnMapTabController") as! UITabBarController
+                        dispatch_async(dispatch_get_main_queue()){
+                            self.presentViewController(controller, animated: true, completion: nil)
+                        }
+                }
             }
         }
     }
-       
+}
+
 }
 
 extension ViewController{
