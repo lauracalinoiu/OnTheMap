@@ -107,10 +107,10 @@ class ViewController: UIViewController, UITextFieldDelegate {
     
     @IBAction func onLoginWithFacebookPressed(sender: UIButton) {
         
-        guard emailTextField.text == "" && passwordTextField.text == "" else{
-            self.alertMessage(didNotSpecifyExactlyOneCredentialError)
-            return
-        }
+//        guard emailTextField.text == "" && passwordTextField.text == "" else{
+//            self.alertMessage(didNotSpecifyExactlyOneCredentialError)
+//            return
+//        }
         let fbManager = FBSDKLoginManager()
         fbManager.logInWithReadPermissions(readPermissions, fromViewController: self){ result, error in
             if ((error) != nil){
