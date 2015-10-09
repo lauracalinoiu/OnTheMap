@@ -10,14 +10,16 @@ import UIKit
 import FBSDKCoreKit
 import FBSDKLoginKit
 
-class ViewController: UIViewController, UITextFieldDelegate, FBSDKLoginButtonDelegate {
+class ViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var debugLabel: UILabel!
     @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var activityWeel: UIActivityIndicatorView!
+    @IBOutlet weak var facebookLoginButton: UIButton!
     
+    let readPermissions = ["public_profile", "email", "user_friends"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,12 +32,6 @@ class ViewController: UIViewController, UITextFieldDelegate, FBSDKLoginButtonDel
         
         let tap = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
         view.addGestureRecognizer(tap)
-        
-        let fbLoginButton = FBSDKLoginButton()
-        fbLoginButton.readPermissions = ["public_profile", "email", "user_friends"]
-        fbLoginButton.center = CGPointMake(self.view.frame.size.width/2, self.view.frame.size.height-30)
-        self.view.addSubview(fbLoginButton)
-        fbLoginButton.delegate = self
     }
     
     func dismissKeyboard(){
@@ -102,9 +98,22 @@ class ViewController: UIViewController, UITextFieldDelegate, FBSDKLoginButtonDel
         }
     }
     
-    @IBAction func onSignInWithFacebookPressed(sender: UIButton) {
+    @IBAction func onLoginWithFacebookPressed(sender: UIButton) {
+        
+        let fbManager = FBSDKLoginManager()
+        fbManager.logInWithReadPermissions(readPermissions, fromViewController: self){ result, error in
+            if ((error) != nil){
+                print(error.description)
+                self.alertMessage("Login with facebook went wrong, try using credentials from Udacity!")
+            }else if result.isCancelled {
+                print("result is cancelled")
+                self.alertMessage("Login with facebook went wrong, try using credentials from Udacity!")
+            }else {
+                print(FBSDKAccessToken.currentAccessToken().tokenString)
+            }
+        }
     }
-    
+       
 }
 
 extension ViewController{
@@ -131,28 +140,4 @@ extension ViewController{
     }
 }
 
-extension ViewController{
-    func loginButton(loginButton: FBSDKLoginButton!, didCompleteWithResult result: FBSDKLoginManagerLoginResult!, error: NSError!) {
-        
-        if ((error) != nil){
-            print(error.description)
-            alertMessage("Login with facebook went wrong, try using credentials from Udacity!")
-        }else if result.isCancelled {
-            print("result is cancelled")
-            alertMessage("Login with facebook went wrong, try using credentials from Udacity!")
-        }else {
-            
-            print(FBSDKAccessToken.currentAccessToken().tokenString)
-        }
-    }
-    
-    func loginButtonDidLogOut(loginButton: FBSDKLoginButton!) {
-        print("log out")
-    }
-    
-    func loginButtonWillLogin(loginButton: FBSDKLoginButton!) -> Bool {
-        print("will log in")
-        return true
-    }
-}
 

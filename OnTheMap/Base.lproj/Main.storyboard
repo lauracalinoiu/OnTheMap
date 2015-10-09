@@ -68,7 +68,7 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </textField>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MKR-mN-NTj">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MKR-mN-NTj">
                                                 <rect key="frame" x="0.0" y="76" width="520" height="34"/>
                                                 <color key="backgroundColor" red="0.91764705882352937" green="0.33885006439625293" blue="0.1559755555186218" alpha="1" colorSpace="calibratedRGB"/>
                                                 <state key="normal" title="Login">
@@ -76,6 +76,10 @@
                                                 </state>
                                                 <state key="disabled">
                                                     <color key="titleColor" red="0.73213546308674982" green="0.53027501720758019" blue="0.54040827386669954" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="titleShadowColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                </state>
+                                                <state key="highlighted">
+                                                    <color key="titleColor" red="0.73213546309999999" green="0.53027501720000003" blue="0.54040827390000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 </state>
                                                 <connections>
                                                     <action selector="onLoginPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="88v-AR-7Ae"/>
@@ -121,6 +125,16 @@
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="O1h-Sa-Dv6">
                                 <rect key="frame" x="568" y="300" width="20" height="20"/>
                             </activityIndicatorView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yo7-KB-voq">
+                                <rect key="frame" x="40" y="562" width="520" height="30"/>
+                                <color key="backgroundColor" red="0.23137254900000001" green="0.34901960780000002" blue="0.59607843140000005" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="Login with Facebook">
+                                    <color key="titleColor" red="1" green="0.92914500231252073" blue="0.9513045215886653" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="onLoginWithFacebookPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Yy6-Je-dm2"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.97647058823529409" green="0.5607843137254902" blue="0.13725490196078433" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -131,15 +145,19 @@
                             <constraint firstItem="O1h-Sa-Dv6" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="280" id="UAF-Sm-wMx"/>
                             <constraint firstAttribute="trailingMargin" secondItem="BcG-i4-gFE" secondAttribute="trailing" constant="20" id="bQA-p2-Zpr"/>
                             <constraint firstItem="BcG-i4-gFE" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="ibL-2Z-hNP"/>
+                            <constraint firstItem="Yo7-KB-voq" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="20" id="jbs-Z1-LHp"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="Yo7-KB-voq" secondAttribute="bottom" constant="8" id="kob-XY-jJR"/>
                             <constraint firstItem="BcG-i4-gFE" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="qp2-qh-jQj"/>
                             <constraint firstAttribute="trailingMargin" secondItem="O1h-Sa-Dv6" secondAttribute="trailing" constant="-8" id="s5W-J0-mUm"/>
                             <constraint firstItem="7XV-Ty-Rge" firstAttribute="trailing" secondItem="BcG-i4-gFE" secondAttribute="trailing" id="wl3-4x-3fP"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Yo7-KB-voq" secondAttribute="trailing" constant="20" id="zpq-FG-37e"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="activityWeel" destination="O1h-Sa-Dv6" id="9zJ-0r-7Lz"/>
                         <outlet property="debugLabel" destination="7XV-Ty-Rge" id="UOF-2N-Kzn"/>
                         <outlet property="emailTextField" destination="5KO-02-qWC" id="mqD-Bh-8iu"/>
+                        <outlet property="facebookLoginButton" destination="Yo7-KB-voq" id="HBF-XH-HKZ"/>
                         <outlet property="loginButton" destination="MKR-mN-NTj" id="XE8-CK-pPG"/>
                         <outlet property="passwordTextField" destination="UiX-eX-eL5" id="cZs-Wl-mkU"/>
                     </connections>
