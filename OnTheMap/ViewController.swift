@@ -90,15 +90,11 @@ class ViewController: UIViewController, UITextFieldDelegate {
                 return
             }
             if success{
-                let controller = self.storyboard!.instantiateViewControllerWithIdentifier("OnMapTabController") as! UITabBarController
-                dispatch_async(dispatch_get_main_queue()){
-                    self.presentViewController(controller, animated: true, completion: nil)
-                }
+               self.toTheTabBarController()
             }
         }
-        
     }
-    
+   
     @IBAction func onSignUpPressed(sender: UIButton) {
         if let openLink = NSURL(string : UdacityAPIClient.Constant.SignInUdacityURL){
             UIApplication.sharedApplication().openURL(openLink)
@@ -106,11 +102,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func onLoginWithFacebookPressed(sender: UIButton) {
-        
-//        guard emailTextField.text == "" && passwordTextField.text == "" else{
-//            self.alertMessage(didNotSpecifyExactlyOneCredentialError)
-//            return
-//        }
         let fbManager = FBSDKLoginManager()
         fbManager.logInWithReadPermissions(readPermissions, fromViewController: self){ result, error in
             if ((error) != nil){
@@ -126,10 +117,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
                         return
                     }
                     if success{
-                        let controller = self.storyboard!.instantiateViewControllerWithIdentifier("OnMapTabController") as! UITabBarController
-                        dispatch_async(dispatch_get_main_queue()){
-                            self.presentViewController(controller, animated: true, completion: nil)
-                        }
+                       self.toTheTabBarController()
                 }
             }
         }
@@ -158,6 +146,15 @@ extension ViewController{
             self.debugLabel.text = message
             self.loginButton.enabled = true
             self.hideActivityWeel()
+        }
+    }
+    
+    
+    func toTheTabBarController(){
+        let appDelegate: AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        dispatch_async(dispatch_get_main_queue()){
+            let tabbarController = self.storyboard!.instantiateViewControllerWithIdentifier("TabBarController") as! UITabBarController
+            appDelegate.window?.rootViewController = tabbarController
         }
     }
 }

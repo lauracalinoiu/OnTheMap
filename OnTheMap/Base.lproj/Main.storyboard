@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8187.4" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8187.4" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="8CY-pT-Elw">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8151.3"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -8,7 +8,7 @@
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="OnTheMap" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LoginViewController" id="BYZ-38-t0r" customClass="ViewController" customModule="OnTheMap" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -23,7 +23,7 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="0u2-cx-U5h">
                                         <rect key="frame" x="0.0" y="0.0" width="520" height="151"/>
                                         <subviews>
-                                            <imageView opaque="NO" userInteractionEnabled="NO" alpha="0.75" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="u" translatesAutoresizingMaskIntoConstraints="NO" id="pSq-i5-HqH">
+                                            <imageView opaque="NO" userInteractionEnabled="NO" alpha="0.75" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="u" translatesAutoresizingMaskIntoConstraints="NO" id="pSq-i5-HqH">
                                                 <rect key="frame" x="137" y="0.0" width="246" height="110"/>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Login to Udacity" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Oef-Rg-btl">
@@ -116,8 +116,8 @@
                                     <constraint firstItem="0u2-cx-U5h" firstAttribute="centerX" secondItem="BcG-i4-gFE" secondAttribute="centerX" id="nVT-cA-L3A"/>
                                 </constraints>
                             </stackView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Messages to the user!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7XV-Ty-Rge">
-                                <rect key="frame" x="40" y="379" width="520" height="182"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Messages to the user!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7XV-Ty-Rge">
+                                <rect key="frame" x="40" y="379" width="520" height="15"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -164,9 +164,9 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="349" y="482"/>
+            <point key="canvasLocation" x="29" y="-402"/>
         </scene>
-        <!--Table View-->
+        <!--On The Map-->
         <scene sceneID="zgB-GW-IkG">
             <objects>
                 <viewController id="nTP-wG-bt2" sceneMemberID="viewController">
@@ -179,16 +179,16 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Table View" id="K2E-7A-XtL"/>
+                    <navigationItem key="navigationItem" title="On The Map" id="oPv-Ma-aKJ"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="srt-b7-Llc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="650" y="1583"/>
+            <point key="canvasLocation" x="1962" y="601"/>
         </scene>
-        <!--Map-->
+        <!--On The Map-->
         <scene sceneID="NTD-Ak-CNT">
             <objects>
-                <viewController id="O4B-4r-oPl" sceneMemberID="viewController">
+                <viewController id="O4B-4r-oPl" customClass="MapViewController" customModule="OnTheMap" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="U5h-5y-w7a"/>
                         <viewControllerLayoutGuide type="bottom" id="7fG-mG-JKi"/>
@@ -197,41 +197,95 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Overwelming Success!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NjL-8c-6bd">
-                                <rect key="frame" x="72" y="210" width="174" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="y8c-w7-Xhs">
+                                <rect key="frame" x="0.0" y="64" width="600" height="487"/>
+                            </mapView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="y8c-w7-Xhs" firstAttribute="bottom" secondItem="7fG-mG-JKi" secondAttribute="top" id="RQ9-Ru-uWk"/>
+                            <constraint firstItem="y8c-w7-Xhs" firstAttribute="leading" secondItem="0OV-Hs-KI4" secondAttribute="leading" id="dhM-2w-eaH"/>
+                            <constraint firstAttribute="trailing" secondItem="y8c-w7-Xhs" secondAttribute="trailing" id="gp9-sq-VAe"/>
+                            <constraint firstItem="y8c-w7-Xhs" firstAttribute="top" secondItem="U5h-5y-w7a" secondAttribute="bottom" id="qVl-xK-htC"/>
+                        </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Map" id="uKv-q7-jUu"/>
+                    <navigationItem key="navigationItem" title="On The Map" id="jJH-gn-L30"/>
+                    <connections>
+                        <outlet property="mapView" destination="y8c-w7-Xhs" id="zkd-V7-fFa"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5DU-vb-rn5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="650" y="923"/>
+            <point key="canvasLocation" x="1962" y="-59"/>
         </scene>
-        <!--Tab Bar Controller-->
-        <scene sceneID="e5H-9m-mo2">
+        <!--Map-->
+        <scene sceneID="N3l-fu-fDW">
             <objects>
-                <tabBarController storyboardIdentifier="OnMapTabController" id="wpy-t9-c2J" sceneMemberID="viewController">
-                    <tabBar key="tabBar" contentMode="scaleToFill" id="lhI-ar-h2i">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="9M6-iE-Y46" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Map" image="map" id="qs6-q3-etd">
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="image" keyPath="selectedImage" value="map"/>
+                        </userDefinedRuntimeAttributes>
+                    </tabBarItem>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="9Oi-sL-JTV">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="O4B-4r-oPl" kind="relationship" relationship="rootViewController" id="W5A-Cd-bzy"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="S3q-79-tNO" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1150" y="-59"/>
+        </scene>
+        <!--Table View-->
+        <scene sceneID="PqU-ac-2qa">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="qU7-gh-S6b" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Table View" image="table" id="8t2-K7-AfS">
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="image" keyPath="selectedImage" value="table"/>
+                        </userDefinedRuntimeAttributes>
+                    </tabBarItem>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="VAW-bI-192">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="nTP-wG-bt2" kind="relationship" relationship="rootViewController" id="TrB-CV-L01"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ctw-KY-OrX" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1150" y="601"/>
+        </scene>
+        <!--tabbarController-->
+        <scene sceneID="C5K-FA-kIo">
+            <objects>
+                <tabBarController storyboardIdentifier="TabBarController" title="tabbarController" automaticallyAdjustsScrollViewInsets="NO" id="8CY-pT-Elw" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" id="srR-eJ-3gx">
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>
                     <connections>
-                        <segue destination="O4B-4r-oPl" kind="relationship" relationship="viewControllers" id="RVk-Es-G1o"/>
-                        <segue destination="nTP-wG-bt2" kind="relationship" relationship="viewControllers" id="MYg-Nh-ZKX"/>
+                        <segue destination="9M6-iE-Y46" kind="relationship" relationship="viewControllers" id="tA8-CS-v2V"/>
+                        <segue destination="qU7-gh-S6b" kind="relationship" relationship="viewControllers" id="wys-BD-EEU"/>
                     </connections>
                 </tabBarController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="nix-ts-cOj" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Wy4-8h-dwH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-278" y="1261"/>
+            <point key="canvasLocation" x="29" y="287"/>
         </scene>
     </scenes>
     <resources>
+        <image name="map" width="32" height="32"/>
+        <image name="table" width="30" height="30"/>
         <image name="u" width="246" height="246"/>
     </resources>
 </document>

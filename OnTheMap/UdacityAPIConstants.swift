@@ -21,9 +21,9 @@ extension UdacityAPIClient{
     
     struct ErrorString{
         static let failedNetworkConnection = "Failed network connection"
-        static let wrongCredentials = "Wrong user/password. Try other credentials!"
         static let invalidResponseWithStatus = "Invalid Response with status code = "
         static let invalidResponse = "Invalid Response"
+        static let wrongCredentials = "Wrong user/password. Try other credentials!"
         static let somethingWentWrong = "Something is wrong with Udacity server"
     }
 }
