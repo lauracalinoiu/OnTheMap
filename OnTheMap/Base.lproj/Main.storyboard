@@ -3,6 +3,7 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8151.3"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -23,7 +24,7 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="0u2-cx-U5h">
                                         <rect key="frame" x="0.0" y="0.0" width="520" height="151"/>
                                         <subviews>
-                                            <imageView opaque="NO" userInteractionEnabled="NO" alpha="0.75" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="u" translatesAutoresizingMaskIntoConstraints="NO" id="pSq-i5-HqH">
+                                            <imageView opaque="NO" userInteractionEnabled="NO" alpha="0.75" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="u" translatesAutoresizingMaskIntoConstraints="NO" id="pSq-i5-HqH">
                                                 <rect key="frame" x="137" y="0.0" width="246" height="110"/>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Login to Udacity" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Oef-Rg-btl">
@@ -179,7 +180,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="On The Map" id="oPv-Ma-aKJ"/>
+                    <navigationItem key="navigationItem" title="On The Map" id="oPv-Ma-aKJ">
+                        <barButtonItem key="leftBarButtonItem" title="Logout" id="3Dz-Zu-SkV"/>
+                        <rightBarButtonItems>
+                            <barButtonItem systemItem="refresh" id="Tm0-Ta-d8l"/>
+                            <barButtonItem image="pin" id="BNn-zw-6ZA"/>
+                        </rightBarButtonItems>
+                    </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="srt-b7-Llc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -209,14 +216,20 @@
                             <constraint firstItem="y8c-w7-Xhs" firstAttribute="top" secondItem="U5h-5y-w7a" secondAttribute="bottom" id="qVl-xK-htC"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="On The Map" id="jJH-gn-L30"/>
+                    <navigationItem key="navigationItem" title="On The Map" id="jJH-gn-L30">
+                        <barButtonItem key="leftBarButtonItem" title="Logout" id="3Df-0h-HCX"/>
+                        <rightBarButtonItems>
+                            <barButtonItem systemItem="refresh" id="lU5-E1-uiC"/>
+                            <barButtonItem image="pin" id="F0w-Ga-crC"/>
+                        </rightBarButtonItems>
+                    </navigationItem>
                     <connections>
                         <outlet property="mapView" destination="y8c-w7-Xhs" id="zkd-V7-fFa"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5DU-vb-rn5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1962" y="-59"/>
+            <point key="canvasLocation" x="1962" y="-65"/>
         </scene>
         <!--Map-->
         <scene sceneID="N3l-fu-fDW">
@@ -285,6 +298,7 @@
     </scenes>
     <resources>
         <image name="map" width="32" height="32"/>
+        <image name="pin" width="60" height="60"/>
         <image name="table" width="30" height="30"/>
         <image name="u" width="246" height="246"/>
     </resources>
