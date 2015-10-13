@@ -168,29 +168,52 @@
             <point key="canvasLocation" x="29" y="-402"/>
         </scene>
         <!--On The Map-->
-        <scene sceneID="zgB-GW-IkG">
+        <scene sceneID="Ad4-SN-w05">
             <objects>
-                <viewController id="nTP-wG-bt2" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="E5o-Ac-vSn"/>
-                        <viewControllerLayoutGuide type="bottom" id="xEi-wl-kTQ"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="w70-7O-Hz5">
+                <tableViewController id="f0N-l9-9fD" customClass="TableViewController" customModule="OnTheMap" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="BYq-pZ-yEn">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <navigationItem key="navigationItem" title="On The Map" id="oPv-Ma-aKJ">
-                        <barButtonItem key="leftBarButtonItem" title="Logout" id="3Dz-Zu-SkV"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" textLabel="n1c-ee-IIM" imageView="Q4w-6b-VWp" style="IBUITableViewCellStyleDefault" id="lLu-YL-eqp">
+                                <rect key="frame" x="0.0" y="92" width="600" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="lLu-YL-eqp" id="UZU-bu-inT">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="n1c-ee-IIM">
+                                            <rect key="frame" x="73" y="0.0" width="512" height="43"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="pin" id="Q4w-6b-VWp">
+                                            <rect key="frame" x="15" y="0.0" width="43" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </imageView>
+                                    </subviews>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="f0N-l9-9fD" id="4NS-YR-ySH"/>
+                            <outlet property="delegate" destination="f0N-l9-9fD" id="OU6-I3-WNf"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="On The Map" id="rED-3O-lcy">
+                        <barButtonItem key="leftBarButtonItem" title="Logout" id="8Lf-QJ-uBf"/>
                         <rightBarButtonItems>
-                            <barButtonItem systemItem="refresh" id="Tm0-Ta-d8l"/>
-                            <barButtonItem image="pin" id="BNn-zw-6ZA"/>
+                            <barButtonItem systemItem="refresh" id="pDj-Qu-Nkg"/>
+                            <barButtonItem image="pin" id="adK-RU-CXG"/>
                         </rightBarButtonItems>
                     </navigationItem>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="srt-b7-Llc" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="q8b-cv-YEH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1962" y="601"/>
+            <point key="canvasLocation" x="1962" y="613"/>
         </scene>
         <!--On The Map-->
         <scene sceneID="NTD-Ak-CNT">
@@ -270,7 +293,7 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="nTP-wG-bt2" kind="relationship" relationship="rootViewController" id="TrB-CV-L01"/>
+                        <segue destination="f0N-l9-9fD" kind="relationship" relationship="rootViewController" id="k6i-h0-5zW"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ctw-KY-OrX" userLabel="First Responder" sceneMemberID="firstResponder"/>

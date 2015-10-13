@@ -23,6 +23,7 @@
 		D3EA45981BBD277F00A8F8D4 /* UdacityAPIConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3EA45971BBD277F00A8F8D4 /* UdacityAPIConstants.swift */; settings = {ASSET_TAGS = (); }; };
 		D3EA459A1BBD2D5C00A8F8D4 /* UdacityAPIConvenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3EA45991BBD2D5C00A8F8D4 /* UdacityAPIConvenience.swift */; settings = {ASSET_TAGS = (); }; };
 		D3EEBA5E1BC7E42D000C9084 /* DBStudentLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3EEBA5D1BC7E42D000C9084 /* DBStudentLocation.swift */; settings = {ASSET_TAGS = (); }; };
+		D3FF603E1BCCFAD100C1C1F1 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3FF603D1BCCFAD100C1C1F1 /* TableViewController.swift */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +45,7 @@
 		D3EA45971BBD277F00A8F8D4 /* UdacityAPIConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UdacityAPIConstants.swift; sourceTree = "<group>"; };
 		D3EA45991BBD2D5C00A8F8D4 /* UdacityAPIConvenience.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UdacityAPIConvenience.swift; sourceTree = "<group>"; };
 		D3EEBA5D1BC7E42D000C9084 /* DBStudentLocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DBStudentLocation.swift; sourceTree = "<group>"; };
+		D3FF603D1BCCFAD100C1C1F1 /* TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +85,7 @@
 				D32421481BBBD2A300ABC598 /* AppDelegate.swift */,
 				D324214A1BBBD2A300ABC598 /* ViewController.swift */,
 				D3E61F281BC7BE62004F4D53 /* MapViewController.swift */,
+				D3FF603D1BCCFAD100C1C1F1 /* TableViewController.swift */,
 				D324214C1BBBD2A300ABC598 /* Main.storyboard */,
 				D324214F1BBBD2A300ABC598 /* Assets.xcassets */,
 				D33FE4581BBE6DCB00214CA3 /* UdacityIdentity.png */,
@@ -193,6 +196,7 @@
 				D3EA45981BBD277F00A8F8D4 /* UdacityAPIConstants.swift in Sources */,
 				D3E61F2D1BC7C2F0004F4D53 /* ParseAPIConstants.swift in Sources */,
 				D3E61F2B1BC7C244004F4D53 /* ParseAPIClient.swift in Sources */,
+				D3FF603E1BCCFAD100C1C1F1 /* TableViewController.swift in Sources */,
 				D3EA45961BBD271D00A8F8D4 /* UdacityAPIClient.swift in Sources */,
 				D3E61F2F1BC7C867004F4D53 /* ParseAPIConvenience.swift in Sources */,
 				D3EEBA5E1BC7E42D000C9084 /* DBStudentLocation.swift in Sources */,
