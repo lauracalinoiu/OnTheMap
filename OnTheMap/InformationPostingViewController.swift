@@ -11,6 +11,7 @@ import UIKit
 class InformationPostingViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var textFieldLocation: UITextField!
+    var doOverwrite: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
