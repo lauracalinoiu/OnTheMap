@@ -69,10 +69,22 @@ class MapViewController: UIViewController {
         }
     }
     
-    @IBAction func newPinPressed(sender: UIBarButtonItem) {
-    }
     @IBAction func refreshPressed(sender: UIBarButtonItem) {
         loadAnnotations()
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "NewPin"{
+            ParseAPIClient.sharedInstance().studentAlreadyOnTheMap(){ userAlreadyOnMap, errorString in
+                guard errorString == nil else{
+                    self.alertMessage(errorString!)
+                    return
+                }
+                if userAlreadyOnMap {
+                    self.alertMessage(ParseAPIClient.ErrorString.youAlreadyAreOnTheMap)
+                }
+            }
+        }
     }
     
     func alertMessage(message: String){

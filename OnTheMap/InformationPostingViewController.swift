@@ -9,7 +9,7 @@
 import UIKit
 
 class InformationPostingViewController: UIViewController, UITextFieldDelegate {
-
+    
     @IBOutlet weak var textFieldLocation: UITextField!
     
     override func viewDidLoad() {

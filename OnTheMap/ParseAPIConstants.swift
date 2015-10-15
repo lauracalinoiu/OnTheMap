@@ -14,12 +14,17 @@ extension ParseAPIClient{
         static let RestApiKey = "QuWThTdiRmTux3YaDseUSEpUKo7aBYM737yKd4gY"
     }
     
+    struct Keys{
+        static let paramLimit = "limit"
+        static let paramWhere = "where"
+    }
     
     struct ErrorString{
         static let failedNetworkConnection = "Failed network connection"
         static let invalidResponseWithStatus = "Invalid Response with status code = "
         static let invalidResponse = "Invalid Response"
         static let somethingWentWrong = "Something went wrong!"
+        static let youAlreadyAreOnTheMap = "You already have a location on the map. Do you want to overwrite?"
     }
 }
 

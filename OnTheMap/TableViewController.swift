@@ -39,9 +39,6 @@ class TableViewController: UITableViewController {
         getDataFromParse()
     }
     
-    
-    @IBAction func newPin(sender: UIBarButtonItem) {
-    }
     // MARK: - Table view data source
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1

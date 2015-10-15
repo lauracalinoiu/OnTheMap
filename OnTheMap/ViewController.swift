@@ -90,11 +90,11 @@ class ViewController: UIViewController, UITextFieldDelegate {
                 return
             }
             if success{
-               self.toTheTabBarController()
+                self.toTheTabBarController()
             }
         }
     }
-   
+    
     @IBAction func onSignUpPressed(sender: UIButton) {
         if let openLink = NSURL(string : UdacityAPIClient.Constant.SignInUdacityURL){
             UIApplication.sharedApplication().openURL(openLink)
@@ -117,13 +117,13 @@ class ViewController: UIViewController, UITextFieldDelegate {
                         return
                     }
                     if success{
-                       self.toTheTabBarController()
+                        self.toTheTabBarController()
+                    }
                 }
             }
         }
     }
-}
-
+    
 }
 
 extension ViewController{

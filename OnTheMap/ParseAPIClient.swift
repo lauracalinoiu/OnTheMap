@@ -18,9 +18,9 @@ class ParseAPIClient: NSObject{
         super.init()
     }
     
-    func taskForGetMethod(completionHandler: (result: AnyObject!, errorString: String?) -> Void) -> NSURLSessionDataTask {
+    func taskForGetMethod(parameters: [String: AnyObject], completionHandler: (result: AnyObject!, errorString: String?) -> Void) -> NSURLSessionDataTask {
         
-        let urlString = Constant.ParseStudentLocationMethod
+        let urlString = Constant.ParseStudentLocationMethod + ParseAPIClient.escapedParameters(parameters)
         let url = NSURL(string: urlString)!
         
         let request = NSMutableURLRequest(URL: url)
@@ -76,6 +76,28 @@ class ParseAPIClient: NSObject{
         completionHandler(result: parsedResult, errorString: nil)
     }
     
+    
+    /* Helper function: Given a dictionary of parameters, convert to a string for a url */
+    class func escapedParameters(parameters: [String : AnyObject]) -> String {
+        
+        var urlVars = [String]()
+        
+        for (key, value) in parameters {
+            
+            /* Make sure that it is a string value */
+            let stringValue = "\(value)"
+            
+            /* Escape it */
+            let escapedValue = stringValue.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())
+            
+            /* Append it */
+            urlVars += [key + "=" + "\(escapedValue!)"]
+            
+        }
+        
+        return (!urlVars.isEmpty ? "?" : "") + urlVars.joinWithSeparator("&")
+    }
+
     class func sharedInstance() -> ParseAPIClient{
         struct Singleton{
             static let sharedInstance = ParseAPIClient()
