@@ -298,7 +298,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <state key="normal" title="Find on the Map"/>
                                 <connections>
-                                    <segue destination="Vaw-Aj-86q" kind="show" id="Hyc-90-OPl"/>
+                                    <action selector="findOnTheMapPressed:" destination="1gZ-yW-J3c" eventType="touchUpInside" id="V0B-64-U4K"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EAJ-Ij-qH8">
@@ -361,10 +361,10 @@
             </objects>
             <point key="canvasLocation" x="2824" y="184"/>
         </scene>
-        <!--View Controller-->
+        <!--Link Editor View Controller-->
         <scene sceneID="7vB-PP-yV2">
             <objects>
-                <viewController id="Vaw-Aj-86q" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LinkEditorVC" id="Vaw-Aj-86q" customClass="LinkEditorViewController" customModule="OnTheMap" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="vDl-qb-Lts"/>
                         <viewControllerLayoutGuide type="bottom" id="DrV-GM-JSq"/>
@@ -391,6 +391,9 @@
                                 <state key="normal" title="Cancel">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
+                                <connections>
+                                    <segue destination="8CY-pT-Elw" kind="show" id="Lsp-pO-kZX"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="EN8-Xh-0MW">
                                 <rect key="frame" x="256" y="506" width="89" height="30"/>
@@ -420,6 +423,9 @@
                     <navigationItem key="navigationItem" id="NxE-ST-QgA">
                         <barButtonItem key="rightBarButtonItem" title="Cancel" id="ATT-Dd-PqX"/>
                     </navigationItem>
+                    <connections>
+                        <outlet property="mapView" destination="bFa-tt-n6F" id="b0Q-wK-vl1"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ALc-lH-D2e" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -497,6 +503,7 @@
         <image name="u" width="246" height="246"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="2rt-QM-Gf4"/>
         <segue reference="X8H-Ty-Uoo"/>
     </inferredMetricsTieBreakers>
 </document>

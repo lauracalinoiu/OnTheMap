@@ -107,7 +107,6 @@ class MapViewController: UIViewController {
                 })
             alertController.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Default,handler: nil))
             
-            
             self.presentViewController(alertController, animated: true, completion: nil)
         }
     }
