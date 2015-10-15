@@ -14,7 +14,10 @@ class TableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        getDataFromParse()
+    }
+    
+    func getDataFromParse(){
         ParseAPIClient.sharedInstance().getLast100StudentLocation(){ studentLocations, error in
             guard error == nil else{
                 self.alertMessage(error!)
@@ -24,7 +27,7 @@ class TableViewController: UITableViewController {
                 print("no locations")
                 return
             }
-           
+            
             self.studentLocations = studentLocations!
             dispatch_async(dispatch_get_main_queue()){
                 self.tableView.reloadData()
@@ -32,6 +35,13 @@ class TableViewController: UITableViewController {
         }
     }
 
+    @IBAction func refreshPressed(sender: UIBarButtonItem) {
+        getDataFromParse()
+    }
+    
+    
+    @IBAction func newPin(sender: UIBarButtonItem) {
+    }
     // MARK: - Table view data source
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1

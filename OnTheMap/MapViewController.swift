@@ -15,7 +15,10 @@ class MapViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        loadAnnotations()
+    }
+    
+    func loadAnnotations(){
         var annotations = [MKPointAnnotation]()
         ParseAPIClient.sharedInstance().getLast100StudentLocation(){ studentLocations, error in
             guard error == nil else{
@@ -35,7 +38,6 @@ class MapViewController: UIViewController {
                 
                 annotations.append(annotation)
             }
-            
             self.mapView.addAnnotations(annotations)
         }
     }
@@ -65,6 +67,12 @@ class MapViewController: UIViewController {
             let app = UIApplication.sharedApplication()
             app.openURL(NSURL(string: (annotationView.annotation!.subtitle!)!)!)
         }
+    }
+    
+    @IBAction func newPinPressed(sender: UIBarButtonItem) {
+    }
+    @IBAction func refreshPressed(sender: UIBarButtonItem) {
+        loadAnnotations()
     }
     
     func alertMessage(message: String){
