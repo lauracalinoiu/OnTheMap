@@ -12,6 +12,8 @@ class ParseAPIClient: NSObject{
     
     var session: NSURLSession
     var keyFromNewSession: String = ""
+    var studentLocation: DBStudentLocation!
+    var doOverwrite = false
     
     override init(){
         session = NSURLSession.sharedSession()
@@ -61,6 +63,106 @@ class ParseAPIClient: NSObject{
         task.resume()
         return task
     }
+    
+    func taskForPutMethod(studentLocationDictionary: [String: AnyObject], completionHandler: (result: AnyObject!, errorString: String?) -> Void) -> NSURLSessionDataTask {
+        
+        let urlString = Constant.ParseStudentLocationMethod + "/\(studentLocation.objectId)"
+        let url = NSURL(string: urlString)!
+        
+        let request = NSMutableURLRequest(URL: url)
+        request.HTTPMethod = "PUT"
+        request.addValue(Constant.ParseApplicationID, forHTTPHeaderField: "X-Parse-Application-Id")
+        request.addValue(Constant.RestApiKey, forHTTPHeaderField: "X-Parse-REST-API-Key")
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        do{
+            request.HTTPBody = try NSJSONSerialization.dataWithJSONObject(studentLocationDictionary, options: .PrettyPrinted)
+            }
+        catch {
+            
+        }
+        
+        let task = session.dataTaskWithRequest(request) { (data, response, error) in
+            
+            guard (error == nil) else {
+                print("There was an error with your request: \(error)")
+                completionHandler(result: nil, errorString: ErrorString.failedNetworkConnection)
+                return
+            }
+            
+            guard let statusCode = (response as? NSHTTPURLResponse)?.statusCode where statusCode >= 200 && statusCode <= 299 else {
+                if let response = response as? NSHTTPURLResponse {
+                    print("Your request returned an invalid response! Status code: \(response.statusCode)!")
+                    completionHandler(result: nil, errorString: ErrorString.invalidResponse+"\(response.statusCode)")
+                    
+                } else if let response = response {
+                    print("Your request returned an invalid response! Response: \(response)!")
+                    completionHandler(result: nil, errorString: ErrorString.invalidResponse+" \(response)")
+                } else {
+                    print("Your request returned an invalid response!")
+                    completionHandler(result: nil, errorString: ErrorString.invalidResponse)
+                }
+                
+                return
+            }
+            
+            guard let data = data else {
+                print("No data was returned by the request!")
+                completionHandler(result: nil, errorString: ErrorString.somethingWentWrong)
+                return
+            }
+            ParseAPIClient.parseJSONWithCompletionHandler(data, completionHandler: completionHandler)
+        }
+        task.resume()
+        return task
+    }
+
+    func taskForPostMethod(studentLocationDictionary: [String: AnyObject], completionHandler: (result: AnyObject!, errorString: String?) -> Void) -> NSURLSessionDataTask {
+        
+        let urlString = Constant.ParseStudentLocationMethod
+        let url = NSURL(string: urlString)!
+        
+        let request = NSMutableURLRequest(URL: url)
+        request.HTTPMethod = "POST"
+        request.addValue(Constant.ParseApplicationID, forHTTPHeaderField: "X-Parse-Application-Id")
+        request.addValue(Constant.RestApiKey, forHTTPHeaderField: "X-Parse-REST-API-Key")
+        do{
+            request.HTTPBody = try! NSJSONSerialization.dataWithJSONObject(studentLocationDictionary, options: .PrettyPrinted)
+        }
+        let task = session.dataTaskWithRequest(request) { (data, response, error) in
+            
+            guard (error == nil) else {
+                print("There was an error with your request: \(error)")
+                completionHandler(result: nil, errorString: ErrorString.failedNetworkConnection)
+                return
+            }
+            
+            guard let statusCode = (response as? NSHTTPURLResponse)?.statusCode where statusCode >= 200 && statusCode <= 299 else {
+                if let response = response as? NSHTTPURLResponse {
+                    print("Your request returned an invalid response! Status code: \(response.statusCode)!")
+                    completionHandler(result: nil, errorString: ErrorString.invalidResponse+"\(response.statusCode)")
+                    
+                } else if let response = response {
+                    print("Your request returned an invalid response! Response: \(response)!")
+                    completionHandler(result: nil, errorString: ErrorString.invalidResponse+" \(response)")
+                } else {
+                    print("Your request returned an invalid response!")
+                    completionHandler(result: nil, errorString: ErrorString.invalidResponse)
+                }
+                
+                return
+            }
+            
+            guard let data = data else {
+                print("No data was returned by the request!")
+                completionHandler(result: nil, errorString: ErrorString.somethingWentWrong)
+                return
+            }
+            ParseAPIClient.parseJSONWithCompletionHandler(data, completionHandler: completionHandler)
+        }
+        task.resume()
+        return task
+    }
+
     
     class func parseJSONWithCompletionHandler(data: NSData, completionHandler: (result: AnyObject!, errorString: String?) -> Void) {
         

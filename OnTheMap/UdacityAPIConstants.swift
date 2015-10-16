@@ -17,6 +17,7 @@ extension UdacityAPIClient{
     
     struct Method{
         static let newSession = "session"
+        static let users = "users"
     }
     
     struct ErrorString{

@@ -90,9 +90,8 @@ class TableViewController: UITableViewController {
             let alertController = UIAlertController(title: "Error Message", message:
                 message, preferredStyle: UIAlertControllerStyle.Alert)
             alertController.addAction(UIAlertAction(title: "Overwrite", style: UIAlertActionStyle.Default){ action in
-                let destination  = segue.destinationViewController as! InformationPostingViewController
-                destination.doOverwrite = true
-            })
+                ParseAPIClient.sharedInstance().doOverwrite = true
+                })
             alertController.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Default,handler: nil))
             
             

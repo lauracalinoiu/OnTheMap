@@ -72,6 +72,49 @@ class UdacityAPIClient: NSObject{
         return task
     }
     
+    func taskForGetMethod(id: String, completionHandler: (result: AnyObject!, errorString: String?) -> Void) -> NSURLSessionDataTask {
+        
+        let urlString = Constant.BaseUdacitySecureURL + UdacityAPIClient.Method.users+"/\(id)"
+        let url = NSURL(string: urlString)!
+        
+        let request = NSMutableURLRequest(URL: url)
+        
+        let task = session.dataTaskWithRequest(request) { (data, response, error) in
+            
+            guard (error == nil) else {
+                print("There was an error with your request: \(error)")
+                completionHandler(result: nil, errorString: ErrorString.failedNetworkConnection)
+                return
+            }
+            
+            guard let statusCode = (response as? NSHTTPURLResponse)?.statusCode where statusCode >= 200 && statusCode <= 299 else {
+                if let response = response as? NSHTTPURLResponse {
+                    print("Your request returned an invalid response! Status code: \(response.statusCode)!")
+                    completionHandler(result: nil, errorString: ErrorString.invalidResponse+"\(response.statusCode)")
+                    
+                } else if let response = response {
+                    print("Your request returned an invalid response! Response: \(response)!")
+                    completionHandler(result: nil, errorString: ErrorString.invalidResponse+" \(response)")
+                } else {
+                    print("Your request returned an invalid response!")
+                    completionHandler(result: nil, errorString: ErrorString.invalidResponse)
+                }
+                
+                return
+            }
+            
+            guard let data = data else {
+                print("No data was returned by the request!")
+                completionHandler(result: nil, errorString: ErrorString.somethingWentWrong)
+                return
+            }
+            UdacityAPIClient.parseJSONWithCompletionHandler(data, completionHandler: completionHandler)
+        }
+        task.resume()
+        return task
+    }
+
+    
     class func parseJSONWithCompletionHandler(data: NSData, completionHandler: (result: AnyObject!, errorString: String?) -> Void) {
         
         var parsedResult: AnyObject!

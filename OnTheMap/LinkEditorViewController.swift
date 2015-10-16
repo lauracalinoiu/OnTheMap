@@ -9,12 +9,14 @@
 import UIKit
 import MapKit
 
-class LinkEditorViewController: UIViewController {
+class LinkEditorViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var mapView: MKMapView!
     var latitude: Double = 0
     var longitude: Double = 0
+    var mapString: String = ""
     let regionRadius: CLLocationDistance = 1000
+    @IBOutlet weak var mediaURL: UITextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,6 +28,18 @@ class LinkEditorViewController: UIViewController {
         annotation.coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
         annotation.title = "Me"
         mapView.addAnnotation(annotation)
+        
+        let tap = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
+        view.addGestureRecognizer(tap)
+    }
+    
+    func dismissKeyboard(){
+        view.endEditing(true)
+    }
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        view.endEditing(true)
+        return true
     }
     
     func centerMapOnLocation(location: CLLocation) {
@@ -33,5 +47,53 @@ class LinkEditorViewController: UIViewController {
             regionRadius * 2.0, regionRadius * 2.0)
         mapView.setRegion(coordinateRegion, animated: true)
     }
+    
+    @IBAction func onSubmitPressed(sender: UIButton) {
+        if ParseAPIClient.sharedInstance().doOverwrite{
+            let studentLocation = ParseAPIClient.sharedInstance().studentLocation!
+            studentLocation.latitude = latitude
+            studentLocation.longitude = longitude
+            studentLocation.mapString = mapString
+            studentLocation.mediaURL = mediaURL.text!
+            ParseAPIClient.sharedInstance().updateStudentLocation(studentLocation){ success, error in
+                guard error == nil else{
+                    self.alertMessage(error)
+                    return
+                }
+                
+                print("Overwritten")
+            }
+        } else {
+           
+             UdacityAPIClient.sharedInstance().getPublicUserData(){ studentLocation, error in
+                guard error == nil else{
+                    self.alertMessage(error!)
+                    return
+                }
+                let studentLocationComplete = studentLocation
+                studentLocationComplete.mapString = self.mapString
+                studentLocationComplete.mediaURL = self.mediaURL.text!
+                studentLocationComplete.latitude = self.latitude
+                studentLocationComplete.longitude = self.longitude
+                ParseAPIClient.sharedInstance().postStudentLocation(studentLocationComplete){ success, error in
+                    guard error == nil else{
+                        self.alertMessage(error)
+                        return
+                    }
+                }
+            }
+        }
+    }
+    
+    func alertMessage(message: String){
+        dispatch_async(dispatch_get_main_queue()){
+            let alertController = UIAlertController(title: "Error Message", message:
+                message, preferredStyle: UIAlertControllerStyle.Alert)
+            alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default,handler: nil))
+            
+            self.presentViewController(alertController, animated: true, completion: nil)
+        }
+    }
+
     
 }

@@ -79,7 +79,25 @@ extension UdacityAPIClient{
                 self.keyFromNewSession = key
                 completionHandler(success: true, errorString: nil)
             }
-            
+        }
+    }
+    
+    func getPublicUserData(completionHandler: (studentLocation: DBStudentLocation!, error: String?) -> Void){
+        taskForGetMethod(UdacityAPIClient.sharedInstance().keyFromNewSession){JSONResult, error in
+            if let error = error {
+                completionHandler(studentLocation: nil, error: error)
+            } else {
+                guard let parsedJSON = JSONResult as? [String: AnyObject] else{
+                    completionHandler(studentLocation: nil, error: ErrorString.somethingWentWrong)
+                    return
+                }
+                guard let user = parsedJSON["user"] as? [String : AnyObject] else{
+                    completionHandler(studentLocation: nil, error: ErrorString.somethingWentWrong)
+                    return
+                }
+                let userOnUdacity = DBStudentLocation(fromUdacityAPI: user)
+                completionHandler(studentLocation: userOnUdacity, error: nil)
+            }
         }
     }
 }

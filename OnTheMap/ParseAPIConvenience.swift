@@ -47,11 +47,57 @@ extension ParseAPIClient{
                 }
                 
                 let studentLocations = DBStudentLocation.studentLocationsFrom(results)
+                
                 if studentLocations.count >= 1 {
+                    ParseAPIClient.sharedInstance().studentLocation = studentLocations[0]
                     completionHandler(userAlreadyOnMap: true, errorString: nil)
                 } else {
                     completionHandler(userAlreadyOnMap: false, errorString: nil)
                 }
+            }
+        }
+    }
+    
+    func updateStudentLocation(studentLocation: DBStudentLocation, completionHandler: (success: Bool, error: String!) -> Void){
+        
+        taskForPutMethod(studentLocation.serialize()){ JSONResult, error in
+            if let error = error {
+                completionHandler(success: false, error: error)
+            } else {
+                guard let parsedJSON = JSONResult as? [String: AnyObject] else{
+                    completionHandler(success: false, error: ErrorString.somethingWentWrong)
+                    return
+                }
+                guard let date = parsedJSON["updatedAt"] as? NSDate else{
+                    completionHandler(success: false, error: ErrorString.somethingWentWrong)
+                    return
+                }
+                print(date)
+                completionHandler(success: true, error: nil)
+            }
+        }
+    }
+    
+    func postStudentLocation(studentLocation: DBStudentLocation, completionHandler: (success: Bool, error: String!) -> Void){
+        taskForPostMethod(studentLocation.serialize()){ JSONResult, error in
+            if let error = error {
+                completionHandler(success: false, error: error)
+            } else {
+                guard let parsedJSON = JSONResult as? [String: AnyObject] else{
+                    completionHandler(success: false, error: ErrorString.somethingWentWrong)
+                    return
+                }
+                guard let createdAt = parsedJSON["createdAt"] as? NSDate else{
+                    completionHandler(success: false, error: ErrorString.somethingWentWrong)
+                    return
+                }
+                
+                guard let objectId = parsedJSON["objectId"] as? String else{
+                    completionHandler(success: false, error: ErrorString.somethingWentWrong)
+                    return
+                }
+                print(objectId + "  created at    " + createdAt.description)
+                completionHandler(success: true, error: nil)
             }
         }
     }

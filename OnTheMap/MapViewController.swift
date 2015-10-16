@@ -73,17 +73,26 @@ class MapViewController: UIViewController {
         loadAnnotations()
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "NewPin"{
-            ParseAPIClient.sharedInstance().studentAlreadyOnTheMap(){ userAlreadyOnMap, errorString in
-                guard errorString == nil else{
-                    self.alertMessage(errorString!)
-                    return
-                }
-                if userAlreadyOnMap {
-                    self.overwriteLocationAlertOnSegue(segue, message: ParseAPIClient.ErrorString.youAlreadyAreOnTheMap)
-                }
+    @IBAction func newPinPressed(sender: UIBarButtonItem) {
+        ParseAPIClient.sharedInstance().studentAlreadyOnTheMap(){ userAlreadyOnMap, errorString in
+            guard errorString == nil else{
+                self.alertMessage(errorString!)
+                return
             }
+            if userAlreadyOnMap {
+                self.overwriteLocationAlertOnSegue(ParseAPIClient.ErrorString.youAlreadyAreOnTheMap)
+            } else {
+                self.goToInformationPostingVC()
+            }
+        }
+
+    }
+    
+    func goToInformationPostingVC(){
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let informationPosting = storyboard.instantiateViewControllerWithIdentifier("InformationPostingVC")
+        dispatch_async(dispatch_get_main_queue()){
+            self.presentViewController( informationPosting, animated: true, completion: nil)
         }
     }
     
@@ -97,14 +106,14 @@ class MapViewController: UIViewController {
         }
     }
     
-    func overwriteLocationAlertOnSegue(segue: UIStoryboardSegue, message: String){
+    func overwriteLocationAlertOnSegue(message: String){
         dispatch_async(dispatch_get_main_queue()){
             let alertController = UIAlertController(title: "Error Message", message:
                 message, preferredStyle: UIAlertControllerStyle.Alert)
             alertController.addAction(UIAlertAction(title: "Overwrite", style: UIAlertActionStyle.Default){ action in
-                let destination  = segue.destinationViewController as! InformationPostingViewController
-                destination.doOverwrite = true
-                })
+                    ParseAPIClient.sharedInstance().doOverwrite = true
+                self.goToInformationPostingVC()
+            })
             alertController.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Default,handler: nil))
             
             self.presentViewController(alertController, animated: true, completion: nil)
