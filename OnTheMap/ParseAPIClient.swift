@@ -64,9 +64,8 @@ class ParseAPIClient: NSObject{
         return task
     }
     
-    func taskForPutMethod(studentLocationDictionary: [String: AnyObject], completionHandler: (result: AnyObject!, errorString: String?) -> Void) -> NSURLSessionDataTask {
-        
-        let urlString = Constant.ParseStudentLocationMethod + "/\(studentLocation.objectId)"
+    func taskForPutMethod(studentLocation: DBStudentLocation, completionHandler: (result: AnyObject!, errorString: String?) -> Void) -> NSURLSessionDataTask {
+        let urlString = Constant.ParseStudentLocationMethod + "/" + studentLocation.objectId
         let url = NSURL(string: urlString)!
         
         let request = NSMutableURLRequest(URL: url)
@@ -74,12 +73,12 @@ class ParseAPIClient: NSObject{
         request.addValue(Constant.ParseApplicationID, forHTTPHeaderField: "X-Parse-Application-Id")
         request.addValue(Constant.RestApiKey, forHTTPHeaderField: "X-Parse-REST-API-Key")
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        do{
-            request.HTTPBody = try NSJSONSerialization.dataWithJSONObject(studentLocationDictionary, options: .PrettyPrinted)
-            }
-        catch {
+        
+        var body = "{ \"mapString\": \"" + studentLocation.mapString + "\", \"mediaURL\": \"" + studentLocation.mediaURL + "\", "
+        body += "\"latitude\": \(studentLocation.latitude), \"longitude\": \(studentLocation.longitude) }"
             
-        }
+        request.HTTPBody = body.dataUsingEncoding(NSUTF8StringEncoding)
+        
         
         let task = session.dataTaskWithRequest(request) { (data, response, error) in
             

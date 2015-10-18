@@ -51,10 +51,13 @@ class LinkEditorViewController: UIViewController, UITextFieldDelegate {
     @IBAction func onSubmitPressed(sender: UIButton) {
         if ParseAPIClient.sharedInstance().doOverwrite{
             let studentLocation = ParseAPIClient.sharedInstance().studentLocation!
+            print("get student location ")
+            
             studentLocation.latitude = latitude
             studentLocation.longitude = longitude
-            studentLocation.mapString = mapString
             studentLocation.mediaURL = mediaURL.text!
+            studentLocation.mapString = mapString
+            
             ParseAPIClient.sharedInstance().updateStudentLocation(studentLocation){ success, error in
                 guard error == nil else{
                     self.alertMessage(error)
@@ -71,10 +74,6 @@ class LinkEditorViewController: UIViewController, UITextFieldDelegate {
                     return
                 }
                 let studentLocationComplete = studentLocation
-                studentLocationComplete.mapString = self.mapString
-                studentLocationComplete.mediaURL = self.mediaURL.text!
-                studentLocationComplete.latitude = self.latitude
-                studentLocationComplete.longitude = self.longitude
                 ParseAPIClient.sharedInstance().postStudentLocation(studentLocationComplete){ success, error in
                     guard error == nil else{
                         self.alertMessage(error)

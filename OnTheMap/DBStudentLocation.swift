@@ -56,7 +56,6 @@ class DBStudentLocation: NSObject{
         studentLocationDict["mediaURL"] = self.mediaURL
         studentLocationDict["latitude"] = self.latitude
         studentLocationDict["longitude"] = self.longitude
-        
         return studentLocationDict
     }
 }

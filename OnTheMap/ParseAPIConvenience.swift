@@ -60,15 +60,15 @@ extension ParseAPIClient{
     
     func updateStudentLocation(studentLocation: DBStudentLocation, completionHandler: (success: Bool, error: String!) -> Void){
         
-        taskForPutMethod(studentLocation.serialize()){ JSONResult, error in
-            if let error = error {
+        taskForPutMethod(studentLocation){ JSONResult, error in
+            if error != nil {
                 completionHandler(success: false, error: error)
             } else {
                 guard let parsedJSON = JSONResult as? [String: AnyObject] else{
                     completionHandler(success: false, error: ErrorString.somethingWentWrong)
                     return
                 }
-                guard let date = parsedJSON["updatedAt"] as? NSDate else{
+                guard let date = parsedJSON["updatedAt"] as? String else{
                     completionHandler(success: false, error: ErrorString.somethingWentWrong)
                     return
                 }
@@ -87,7 +87,7 @@ extension ParseAPIClient{
                     completionHandler(success: false, error: ErrorString.somethingWentWrong)
                     return
                 }
-                guard let createdAt = parsedJSON["createdAt"] as? NSDate else{
+                guard let createdAt = parsedJSON["createdAt"] as? String else{
                     completionHandler(success: false, error: ErrorString.somethingWentWrong)
                     return
                 }
@@ -96,7 +96,7 @@ extension ParseAPIClient{
                     completionHandler(success: false, error: ErrorString.somethingWentWrong)
                     return
                 }
-                print(objectId + "  created at    " + createdAt.description)
+                print(objectId + "  created at    " + createdAt)
                 completionHandler(success: true, error: nil)
             }
         }
