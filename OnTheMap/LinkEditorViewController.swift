@@ -47,34 +47,45 @@ class LinkEditorViewController: UIViewController, UITextFieldDelegate {
             regionRadius * 2.0, regionRadius * 2.0)
         mapView.setRegion(coordinateRegion, animated: true)
     }
+
+    func updateStudentLocationObject(studentLocation: DBStudentLocation) {
+        studentLocation.latitude = latitude
+        studentLocation.longitude = longitude
+        studentLocation.mediaURL = mediaURL.text!
+        studentLocation.mapString = mapString
+    }
     
+    
+    func toTabBarView(){
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let tabbarController = storyboard.instantiateViewControllerWithIdentifier("TabBarController")
+        dispatch_async(dispatch_get_main_queue()){
+            self.presentViewController( tabbarController, animated: true, completion: nil)
+        }
+    }
+    
+    func updateParseWithNewValues(){
+        let studentLocation = ParseAPIClient.sharedInstance().studentLocation!
+        updateStudentLocationObject(studentLocation)
+        
+        ParseAPIClient.sharedInstance().updateStudentLocation(studentLocation){ success, error in
+            guard error == nil else{
+                self.alertMessage(error)
+                return
+            }
+            self.toTabBarView()
+        }
+    }
     @IBAction func onSubmitPressed(sender: UIButton) {
         if ParseAPIClient.sharedInstance().doOverwrite{
-            let studentLocation = ParseAPIClient.sharedInstance().studentLocation!
-            print("get student location ")
-            
-            studentLocation.latitude = latitude
-            studentLocation.longitude = longitude
-            studentLocation.mediaURL = mediaURL.text!
-            studentLocation.mapString = mapString
-            
-            ParseAPIClient.sharedInstance().updateStudentLocation(studentLocation){ success, error in
-                guard error == nil else{
-                    self.alertMessage(error)
-                    return
-                }
-                
-                print("Overwritten")
-            }
+            updateParseWithNewValues()
         } else {
-           
              UdacityAPIClient.sharedInstance().getPublicUserData(){ studentLocation, error in
                 guard error == nil else{
                     self.alertMessage(error!)
                     return
                 }
-                let studentLocationComplete = studentLocation
-                ParseAPIClient.sharedInstance().postStudentLocation(studentLocationComplete){ success, error in
+                ParseAPIClient.sharedInstance().postStudentLocation(studentLocation){ success, error in
                     guard error == nil else{
                         self.alertMessage(error)
                         return

@@ -138,7 +138,7 @@
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="0.97647058823529409" green="0.5607843137254902" blue="0.13725490196078433" alpha="1" colorSpace="calibratedRGB"/>
-                        <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="7XV-Ty-Rge" firstAttribute="leading" secondItem="BcG-i4-gFE" secondAttribute="leading" id="0vn-j8-cHZ"/>
                             <constraint firstItem="7XV-Ty-Rge" firstAttribute="top" secondItem="BcG-i4-gFE" secondAttribute="bottom" constant="14" id="Gwt-15-4Tc"/>
@@ -187,7 +187,7 @@
                                             <rect key="frame" x="73" y="0.0" width="512" height="43"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="pin" id="Q4w-6b-VWp">
